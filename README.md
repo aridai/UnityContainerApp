@@ -21,7 +21,7 @@ Releaseビルドのとき:
 
 Debugビルドのとき:
 
-![Debugビルド時の画面](resources/release.png)
+![Debugビルド時の画面](resources/debug.png)
 
 ボタンを押したとき:
 
