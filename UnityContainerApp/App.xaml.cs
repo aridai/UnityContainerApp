@@ -19,6 +19,9 @@ namespace UnityContainerApp
             //  これは引数なしコンストラクタを持つため、型での紐付けで良い。
             this.container.RegisterType<Girlfriend, Marisa>();
 
+            //  引数なしコンストラクタを持つ具象型の場合は別に書かなくてもいい。
+            //  this.container.RegisterType<Boyfriend, Boyfriend>();
+
             //  インターフェースとインスタンスを紐付ける。
             //  この場合はシングルトンになると思われる。
             //  this.container.RegisterInstance<Couple>(new Couple(this.container.Resolve<Girlfriend>()));

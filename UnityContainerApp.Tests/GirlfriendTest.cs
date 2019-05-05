@@ -13,6 +13,9 @@ namespace UnityContainerApp.Tests
         {
             var container = new UnityContainer();
             container.RegisterType<Girlfriend, Alice>();
+            //  container.RegisterInstance<Girlfriend>(new Alice());
+            //  container.RegisterFactory<Girlfriend>(_ => new Alice());
+            //  container.RegisterType<Boyfriend, Boyfriend>();
 
             var couple = container.Resolve<Couple>();
             Assert.AreEqual("aridaiとアリスはカップルです。", couple.ToString());

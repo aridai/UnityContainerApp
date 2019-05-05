@@ -1,5 +1,6 @@
 ﻿using System;
 using Prism.Mvvm;
+using Unity;
 using UnityContainerApp.Models;
 
 namespace UnityContainerApp.ViewModels
@@ -10,6 +11,7 @@ namespace UnityContainerApp.ViewModels
 
         public string Text => this.Couple.ToString();
 
+        [InjectionConstructor]
         public MainWindowViewModel(Couple couple)
         {
             this.Couple = couple;

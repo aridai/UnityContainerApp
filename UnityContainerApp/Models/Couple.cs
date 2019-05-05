@@ -1,14 +1,23 @@
 ﻿using System;
+using Unity;
 
 namespace UnityContainerApp.Models
 {
+    //  Girlfriendはコンストラクタインジェクションで、
+    //  Boyfriendはフィールドインジェクションで依存性の注入をしてみる。
+    //  フィールド・プロパティインジェクションは外からアクセスできるセッタが必要みたい。
+
     public sealed class Couple
     {
+        [Dependency]
+        internal Boyfriend boyfriend;
+
         public Girlfriend Girlfriend { get; }
 
-        public Boyfriend Boyfriend { get; } = new Boyfriend();
+        public Boyfriend Boyfriend => this.boyfriend;
 
-        public Couple(Girlfriend girlfriend)
+        [InjectionConstructor]
+        public Couple([Dependency]Girlfriend girlfriend)
         {
             this.Girlfriend = girlfriend;
         }
