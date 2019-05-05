@@ -1,0 +1,77 @@
+@startuml
+skinparam dpi 300
+
+namespace UnityContainerApp {
+    namespace Models {
+        abstract class Girlfriend {
+            + {abstract} Name: string
+        }
+        
+        class Marisa
+        note bottom: aridaiの本命の彼女
+
+        class Alice
+        note bottom: テスト・デバッグ用の彼女
+
+        class Boyfriend {
+            + Name: string
+        }
+        class Couple {
+            - boyfriend: Boyfriend
+            + Boyfriend: Boyfriend
+            + Girlfriend: Girlfriend
+            + Couple(girlfriend: Girlfriend)
+        }
+        note top
+            girlfriendはコンストラクタで注入され、
+            boyfriendはフィールドで注入される。
+        end note
+
+        Girlfriend <|- Marisa
+        Alice -|> Girlfriend
+        Couple -> Boyfriend
+        Couple --> Girlfriend
+    }
+
+    namespace ViewModels {
+        class MainWindowViewModel {
+            + Text: string
+            + ButtonCommand: ReactiveCommand
+            + DialogRequest: InteractionRequest<Confirmation>
+            + MainWindowViewModel(couple: Couple)
+        }
+        note bottom
+            coupleはコンストラクタで注入される。
+            ViewModelLocatorでViewにセットされる。
+        end note
+    }
+
+    namespace Behaviors {
+        class DisposingBehavior
+    }
+
+    namespace TriggerActions {
+        class PopupWindowAction
+    }
+
+    namespace Triggers {
+        class InteractionRequestTrigger
+    }
+}
+
+namespace Prism {
+    abstract class BindableBase
+}
+
+namespace System {
+    interface INotifyPropertyChanged
+}
+
+Prism.BindableBase ..|> System.INotifyPropertyChanged
+Prism.BindableBase <|-- UnityContainerApp.ViewModels.MainWindowViewModel
+UnityContainerApp.ViewModels.MainWindowViewModel .> UnityContainerApp.Models.Couple
+
+UnityContainerApp.Behaviors.DisposingBehavior -[hidden]u- UnityContainerApp.Triggers.InteractionRequestTrigger
+UnityContainerApp.Triggers.InteractionRequestTrigger -[hidden]u- UnityContainerApp.TriggerActions.PopupWindowAction
+
+@enduml
