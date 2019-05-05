@@ -112,11 +112,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\DisposingBehavior.cs" />
+    <Compile Include="Triggers\InteractionRequestTrigger.cs" />
     <Compile Include="Models\Alice.cs" />
     <Compile Include="Models\Boyfriend.cs" />
     <Compile Include="Models\Couple.cs" />
     <Compile Include="Models\Girlfriend.cs" />
     <Compile Include="Models\Marisa.cs" />
+    <Compile Include="TriggerActions\PopupWindowAction.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
